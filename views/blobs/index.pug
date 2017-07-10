@@ -3,23 +3,35 @@ extends ../layout.pug
 block content
     h1.
          Records
-    ul
+    table
+
+        thead
+          tr 
+            th name
+            th badge
+            th Date of birth
+            th is loved
+            th ID
+            th Actions    
+        tbody
+    
          each blob, i in blobs
-            li
-                = blob.name
-                = blob.badge
-                = blob.dob
-                = blob.isloved
-                = blob._id
-                form(action='/blobs/' + blob._id +'/edit',method='post',enctype='application/x-www-form-urlencoded')
-                   input(type='hidden',value='DELETE',name='_method')
-                   button(type='submit').
-                        Delete
-                p 
+            tr
+                td=blob.name
+                td=blob.badge
+                td=blob.dob
+                td=blob.isloved
+                td=blob._id
+                td
+                    form(action='/blobs/' + blob._id +'/edit',method='post',enctype='application/x-www-form-urlencoded')
+                         input(type='hidden',value='DELETE',name='_method')
+                         button(type='submit'). 
+                          Delete
                     a(href='/blobs/' + blob._id + '/edit') Edit
-                p
+                    br
                     a(href='/blobs/' + blob._id) Show
 
-                    
+    p  
+      a(href='/new' ) Add a NEW record                
     p Back to 
       a(href='../' ) Index
